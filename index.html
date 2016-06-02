@@ -4,7 +4,11 @@
 		<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js">
 		</script>
 		<textarea id='in'onkeyup="myFunction(this.value, this.id)" rows='10' columns='40'>Try it</textarea>
-		<textarea id='out' onload='myFunction(in.value, in.id)' rows='10' columns='40'></textarea>
+		<textarea id='out' onload='myFunction(in.value, in.id)' rows='10' columns='40'></textarea><br />
+		seed (first letter of original message):
+		<textarea maxlength='1' placeholder='T' id='seed' rows='1' cols='2' style="resize:none" ></textarea><br />
+		set seed automatically:<input type='checkbox' id='autoseed'>
+		
 		<script>
 			String.prototype.hexEncode = function(){
 				var hex, i;
@@ -35,6 +39,16 @@
 				var r='';
 				r=t.hexEncode().hexDecode();
 				document.getElementById('out').value = r;
+				
+				if(t.length!=0){
+					document.getElementById('seed').placeholder=t[0];
+					if(!document.getElementById('autoseed').checked) {
+						document.getElementById('seed').value=t[0];
+					}
+				} else {
+					document.getElementById('seed').placeholder='';
+					document.getElementById('seed').value='';
+				}
 			}
 		</script>
 	</body>
