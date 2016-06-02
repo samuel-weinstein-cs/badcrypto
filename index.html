@@ -3,32 +3,37 @@
 	<body>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js">
 		</script>
-		<textarea id='in'onkeyup="myFunction(this.value, this.id)">Try it</textarea>
-		<textarea id='out'>Try it</textarea>
+		<textarea id='in'onkeyup="myFunction(this.value, this.id)" rows='10' columns='40'>Try it</textarea>
+		<textarea id='out' onload='myFunction(in.value, in.id)' rows='10' columns='40'></textarea>
 		<script>
 			String.prototype.hexEncode = function(){
 				var hex, i;
 				var result = "";
 				for (i=0; i<this.length; i++) {
-					hex = this.charCodeAt(i).toString(16);
-					result += (hex).slice(-5)+' ';
+					//hex = this.charCodeAt(i);
+					var min=this.charCodeAt(i)-161;
+					var max=1524-this.charCodeAt(i);
+					var range = (max-min)-((max-min)/2)
+					var rand = Math.floor(Math.random() * (max - min + 1)) + min;
+					hex = parseInt(this.charCodeAt(i))+rand;
+					result += ('00000'+hex).slice(-5);
+					//alert(cur);
 				}
 				return result
 			}
 			String.prototype.hexDecode = function(){
 				var j;
-				var hexes = this.match(/.{1,4}/g) || [];
+				var hexes = this.match(/.{1,5}/g) || [];
 				var back = "";
 				for(j = 0; j<hexes.length; j++) {
-					back += String.fromCharCode(parseInt(hexes[j], 16));
+					back += String.fromCharCode(parseInt(hexes[j], 10));
 				}
 				return back;
 			}
 			function myFunction(t,j) {
+				Math.seedrandom(t[0]);
 				var r='';
-				for (i = 0; i < t.length; i++) {
-					r=t.hexEncode();
-				}
+				r=t.hexEncode().hexDecode();
 				document.getElementById('out').value = r;
 			}
 		</script>
