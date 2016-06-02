@@ -1,14 +1,35 @@
 <html>
-	<head>
+	<body>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js">
+		</script>
+		<textarea id='in'onkeyup="myFunction(this.value, this.id)">Try it</textarea>
+		<textarea id='out'>Try it</textarea>
 		<script>
-			function myFunction(){
-				alert("hey");
+			String.prototype.hexEncode = function(){
+				var hex, i;
+				var result = "";
+				for (i=0; i<this.length; i++) {
+					hex = this.charCodeAt(i).toString(16);
+					result += (hex).slice(-5)+' ';
+				}
+				return result
+			}
+			String.prototype.hexDecode = function(){
+				var j;
+				var hexes = this.match(/.{1,4}/g) || [];
+				var back = "";
+				for(j = 0; j<hexes.length; j++) {
+					back += String.fromCharCode(parseInt(hexes[j], 16));
+				}
+				return back;
+			}
+			function myFunction(t,j) {
+				var r='';
+				for (i = 0; i < t.length; i++) {
+					r=t.hexEncode();
+				}
+				document.getElementById('out').value = r;
 			}
 		</script>
-	</head>
-	<body>
-		<textarea onkeyup='myFunction'>
-			
-		</textarea>
 	</body>
 </html>
