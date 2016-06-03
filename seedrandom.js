@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-(Math.function (pool, math) {
+(function (pool, math) {
 //
 // The following constants are related to IEEE 754 limits.
 //
