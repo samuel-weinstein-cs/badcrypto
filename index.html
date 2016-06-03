@@ -53,7 +53,6 @@
 				return result;
 			}
 			String.prototype.decDecode = function(){
-				Math.seedrandom(document.getElementById('seed').value);
 				var j;
 				var hexes = this.match(/.{1,5}/g) || [];
 				var back = "";
@@ -75,13 +74,13 @@
 					document.getElementById('seed').placeholder='';
 					document.getElementById('seed').value='';
 				}
-				Math.seedrandom(document.getElementById('seed').value);
+				seedrandom(document.getElementById('seed').value);
 				r=t.decEncodeRand().decDecode();
 				document.getElementById('out').value = r;
 			}
 			function decode(t) {
 				var r='';
-				Math.seedrandom(document.getElementById('seed').value);
+				seedrandom(document.getElementById('seed').value);
 				r=t.decEncodeUnrand().decDecode();
 				document.getElementById('in').value = r;
 			}
