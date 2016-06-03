@@ -3,29 +3,42 @@
 	<body>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js">
 		</script>
-		<textarea id='in'onkeyup="myFunction(this.value, this.id)" rows='10' columns='40'>Try it</textarea>
-		<textarea id='out' onload='myFunction(in.value, in.id)' rows='10' columns='40'></textarea><br />
+		<textarea id='in'onkeyup="encode(this.value)" rows='10' columns='40'>Try it</textarea>
+		<textarea id='out' onkeyup="decode" rows='10' columns='40'></textarea><br />
 		seed (first letter of original message):
 		<textarea maxlength='1' placeholder='T' id='seed' rows='1' cols='2' style="resize:none" ></textarea><br />
 		set seed automatically:<input type='checkbox' id='autoseed'>
 		
 		<script>
-			String.prototype.hexEncode = function(){
+			String.prototype.decEncodeRand = function(){
 				var hex, i;
 				var result = "";
+				Math.seedrandom(this[0]);
 				for (i=0; i<this.length; i++) {
 					//hex = this.charCodeAt(i);
-					var min=this.charCodeAt(i)-161;
-					var max=1524-this.charCodeAt(i);
-					var range = (max-min)-((max-min)/2)
-					var rand = Math.floor(Math.random() * (max - min + 1)) + min;
-					hex = parseInt(this.charCodeAt(i))+rand;
+					var outmin=161;
+					var outmax=1524;
+					var inmin=33;
+					var outmin=126;
+					rand=floor(Math.random()*(outmax-dis))+this.charCodeAt(i)-inmin+outmin;
+					hex = rand.toString();
 					result += ('00000'+hex).slice(-5);
-					//alert(cur);
+					alert(rand);
+					alert(randtest);
 				}
 				return result
 			}
-			String.prototype.hexDecode = function(){
+			String.prototype.decEncodeUnrand = function(){
+				var hex, i;
+				var result = "";
+				for (i=0; i<this.length; i++) {
+					hex = this.charCodeAt(i).toString();
+					hex = parseInt(this.charCodeAt(i))+rand;
+					result += ('00000'+hex).slice(-5);
+				}
+				return result
+			}
+			String.prototype.decDecode = function(){
 				var j;
 				var hexes = this.match(/.{1,5}/g) || [];
 				var back = "";
@@ -34,10 +47,10 @@
 				}
 				return back;
 			}
-			function myFunction(t,j) {
-				Math.seedrandom(t[0]);
+			function encode(t) {
 				var r='';
-				r=t.hexEncode().hexDecode();
+				Math.seedrandom(document.getElementById('seed').value);
+				r=t.decEncodeRand().decDecode();
 				document.getElementById('out').value = r;
 				
 				if(t.length!=0){
@@ -49,6 +62,10 @@
 					document.getElementById('seed').placeholder='';
 					document.getElementById('seed').value='';
 				}
+			}
+			function decode(t) {
+				var r='';
+				Math.seedrandom(document.getElementById('seed').value);
 			}
 		</script>
 	</body>
