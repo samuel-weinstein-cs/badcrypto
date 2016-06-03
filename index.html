@@ -13,7 +13,7 @@
 		<textarea id='out' onkeyup="decode(this.value)" rows='10' columns='40'></textarea><br />
 		seed (first letter of original message):
 		<textarea maxlength='1' placeholder='T' id='seed' rows='1' cols='2' style="resize:none" ></textarea><br />
-		set seed automatically:<input type='checkbox' id='autoseed'>
+		set seed manually:<input type='checkbox' id='autoseed'>
 		
 		<script>
 			String.prototype.decEncodeRand = function(){
@@ -27,9 +27,9 @@
 					var inmax=126;
 					var dis=inmax-inmin;
 					//alert(this.charCodeAt(i));
-					rand=Math.floor(Math.random()*(outmax-outmin-dis))+this.charCodeAt(i)-inmin+outmin;
+					rand=Math.floor(Math.random()*(outmax-outmin-dis))-inmin+outmin;
 					//alert(rand);
-					hex = rand;
+					hex = rand+this.charCodeAt(i);
 					result += ('00000'+hex).slice(-5);
 					//alert(rand);
 					//alert(randtest);
@@ -46,9 +46,8 @@
 					var inmin=32;
 					var inmax=126;
 					var dis=inmax-inmin;
-					rand=Math.floor(Math.random()*(outmax-outmin-dis))+this.charCodeAt(i)-inmin+outmin;
-					
-					hex = -1*(this.charCodeAt(i)-rand);
+					rand=Math.floor(Math.random()*(outmax-outmin-dis))-inmin+outmin;
+					hex = this.charCodeAt(i)-rand;
 					result += ('00000'+hex).slice(-5);
 				}
 				return result;
@@ -82,17 +81,6 @@
 			}
 			function decode(t) {
 				var r='';
-				
-				
-				if(t.length!=0){
-					document.getElementById('seed').placeholder=t[0];
-					if(!document.getElementById('autoseed').checked) {
-						document.getElementById('seed').value=t[0];
-					}
-				} else {
-					document.getElementById('seed').placeholder='';
-					document.getElementById('seed').value='';
-				}
 				Math.seedrandom(document.getElementById('seed').value);
 				r=t.decEncodeUnrand().decDecode();
 				document.getElementById('in').value = r;
