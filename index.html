@@ -10,6 +10,9 @@
 		set seed automatically:<input type='checkbox' id='autoseed'>
 		
 		<script>
+			window.onerror=function(){
+ 				alert('An error has occurred!')
+			}
 			String.prototype.decEncodeRand = function(){
 				var hex, i, rand;
 				var result = "";
@@ -21,7 +24,7 @@
 					var inmax=126;
 					var dis=inmax-inmin;
 					//alert(this.charCodeAt(i));
-					rand=floor(Math.random()*(outmax-dis))+this.charCodeAt(i)-inmin+outmin;
+					rand=Math.floor(Math.random()*(outmax-dis))+this.charCodeAt(i)-inmin+outmin;
 					alert(rand);
 					hex = rand;
 					result += ('00000'+hex).slice(-5);
