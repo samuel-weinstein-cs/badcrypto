@@ -27,8 +27,8 @@
 					var inmax=126;
 					var dis=inmax-inmin;
 					//alert(this.charCodeAt(i));
-					rand=Math.floor(Math.random()*(outmax-dis))+this.charCodeAt(i)-inmin+outmin;
-					alert(rand);
+					rand=Math.floor(Math.random()*(outmax-outmin-dis))+this.charCodeAt(i)-inmin+outmin;
+					//alert(rand);
 					hex = rand;
 					result += ('00000'+hex).slice(-5);
 					//alert(rand);
