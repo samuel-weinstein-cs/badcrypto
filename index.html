@@ -3,9 +3,10 @@
 	<body>
 		<script type="text/javascript">
 			window.onerror=function(msg, url, linenumber){
-				alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber)
-				return true
+			 alert('Error message: '+msg+'\nURL: '+url+'\nLine Number: '+linenumber)
+			 return true
 			}
+<<<<<<< HEAD
 </script>
 		<script src=//cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js></script>
 		<textarea id='in'onkeyup="encode(this.value)" rows='10' columns='40'>Try it</textarea>
@@ -14,6 +15,17 @@
 		<textarea maxlength='1' placeholder='T' id='seed' rows='1' cols='2' style="resize:none" ></textarea><br />
 		set seed manually:<input type='checkbox' id='autoseed' checked>
 		
+=======
+		</script>
+		<script src=http://cdnjs.cloudflare.com/ajax/libs/seedrandom/2.4.0/seedrandom.min.js></script>
+		<textarea id='in'onkeyup="encode(this.value)" rows='10' cols='80'>Type Here</textarea>
+		<textarea id='out' onkeyup="decode(this.value)" rows='10' cols='80'></textarea>
+		<br />
+		Seed:
+		<textarea maxlength='1' placeholder='T' id='seed' rows='1' cols='2' style="resize:none" ></textarea>
+		<br />
+		Custom Seed:<input type='checkbox' id='autoseed' checked>
+>>>>>>> dev
 		<script>
 			String.prototype.decEncodeRand = function(){
 				var hex, i, rand;
@@ -62,21 +74,16 @@
 			}
 			function encode(t) {
 				var r='';
-				
-				
 				if(t.length!=0){
 					document.getElementById('seed').placeholder=t[0];
 					if(!document.getElementById('autoseed').checked) {
 						document.getElementById('seed').value=t[0];
 					}
-				} else {
-					document.getElementById('seed').placeholder='';
-					document.getElementById('seed').value='';
 				}
 				Math.seedrandom(document.getElementById('seed').value);
 				r=t.decEncodeRand().decDecode();
 				document.getElementById('out').value = r;
-			}
+				}
 			function decode(t) {
 				var r='';
 				Math.seedrandom(document.getElementById('seed').value);
