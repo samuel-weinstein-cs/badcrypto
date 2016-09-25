@@ -1,5 +1,20 @@
 <meta charset="UTF-16">
 <html>
+	<style>
+		html body {
+			margin: 0;
+			padding: 0;
+			height: 100%;
+			width: 100%;
+			font-family: "Lucida Console", Monaco, monospace;		
+			}
+		textarea {
+			font-family: "Lucida Console", Monaco, monospace;
+			font-size: 12px;
+		}
+		
+
+	</style>
 	<body>
 		<script type="text/javascript">
 			window.onerror=function(msg, url, linenumber){
@@ -11,8 +26,10 @@
 		<textarea id='in'onkeyup="encode(this.value)" rows='10' cols='80'>Type Here</textarea>
 		<textarea id='out' onkeyup="decode(this.value)" rows='10' cols='80'></textarea>
 		<br />
+		<input type="radio" name="seed" value="custom" onclick="alert('custom')"> Custom<br>
+		<input type="radio" name="seed" value="datetime"> Current date/time<br>
 		Seed:
-		<textarea maxlength='1' placeholder='T' id='seed' rows='1' cols='2' style="resize:none" ></textarea>
+		<textarea maxlength='10' placeholder='S' id='seed' rows='1' cols='10' style="resize:none" ></textarea>
 		<br />
 		Custom Seed:<input type='checkbox' id='autoseed' checked>
 		<script>
